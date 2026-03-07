@@ -10,13 +10,19 @@ CREATE TABLE IF NOT EXISTS items(
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR (255),
     image VARCHAR (255),
-    category VARCHAR (255) REFERENCES categories(id)
+    category INTEGER REFERENCES categories(id)
 );
 `;
 
 async function main(){
     console.log('Seeding...');
     const client = new Client({
-        connectionString: "postgresql://<role_name>:<role_password>@localhost:5432/top_users"
+        connectionString: `postgresql://${process.env.ROLE_NAME}:${process.env.ROLE_PASSWORD}@localhost:5432/inventoryapplication`
     });
+    await client.connect();
+    await client.query(SQL);
+    await client.end();
+    console.log('Seeding Done.');
 }
+
+main();
