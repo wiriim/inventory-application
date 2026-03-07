@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Application</title>
+</head>
+<body>
+    <h1>Inventory Application - Pokemon Ver</h1>
+    <form action="/" method="post">
+        <h2>Create New Category</h2>
+        <label for="category">Category Name: </label>
+        <input type="text" id="category" name="category">
+        <button>Create</button>
+    </form>
+
+    <br>
+
+    <section>
+        <h2>All Categories:</h2>
+        <div class="categoriesContainer" style="display: flex; gap: 2rem;">
+            <% categories.forEach(category => { %>
+                <div class="category" style="border: 1px solid black; padding: 1rem; text-align: center;">
+                    <a href="./items/<%= category.id %>"><h3><%= category.type %></h3></a>
+                    <a href="">Edit</a>
+                    <a href="./deleteCategory/<%= category.id %>">Delete</a>
+                </div>
+            <% }); %>
+        </div>
+        
+    </section>
+</body>
+</html>

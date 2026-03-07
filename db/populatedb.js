@@ -9,9 +9,12 @@ CREATE TABLE IF NOT EXISTS categories (
 CREATE TABLE IF NOT EXISTS items(
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR (255),
-    image VARCHAR (255),
-    category INTEGER REFERENCES categories(id)
+    category INTEGER REFERENCES categories(id) ON DELETE CASCADE
 );
+
+INSERT INTO categories(type) VALUES('Fire'), ('Water');
+
+INSERT INTO items(name, category) VALUES('Charizard', 1);
 `;
 
 async function main(){
