@@ -15,4 +15,9 @@ async function deleteCategory(req, res){
     res.redirect('/');
 }
 
-module.exports = { getHomePage, createCategory, deleteCategory };
+async function editCategory(req, res){
+    await db.editCategory(req.body.type, req.body.id);
+    res.redirect('/');
+}
+
+module.exports = { getHomePage, createCategory, deleteCategory, editCategory };

@@ -3,8 +3,8 @@ const db = require('../db/queries');
 async function getItemsPage(req, res){
     const categoryId = req.params.categoryId
     const items = await db.getAllItems(categoryId);
-    const category = await db.getCategoryById(categoryId);
-    res.render('itemsPage', { items, category: category[0].type, categoryId});
+    const categories = await db.getCategoryById(categoryId);
+    res.render('itemsPage', { items, category: categories[0].type, categoryId});
 }
 
 async function createItem(req, res){
@@ -13,8 +13,17 @@ async function createItem(req, res){
 }
 
 async function deleteItem(req, res){
+    const items = await db.getItemById(req.params.id);
+    const categories = await db.getCategoryById(items[0].category);
     await db.deleteItem(req.params.id);
-    res.redirect('/');
+    res.redirect('/items/' + categories[0].id);
 }
 
-module.exports = { getItemsPage, createItem, deleteItem };
+async function editItem(req, res){
+    const items = await db.getItemById(req.body.id);
+    const categories = await db.getCategoryById(items[0].category);
+    await db.editItem(req.body.name, req.body.id);
+    res.redirect('/items/' + categories[0].id);
+}
+
+module.exports = { getItemsPage, createItem, deleteItem, editItem };

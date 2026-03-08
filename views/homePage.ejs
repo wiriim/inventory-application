@@ -22,7 +22,15 @@
             <% categories.forEach(category => { %>
                 <div class="category" style="border: 1px solid black; padding: 1rem; text-align: center;">
                     <a href="./items/<%= category.id %>"><h3><%= category.type %></h3></a>
-                    <a href="">Edit</a>
+                    <p>
+                        <form action="/editCategory" method="post">
+                            <label for="type">Edit Type: </label>
+                            <input style="display: block; max-width: 100px; margin: 8px 0; padding: 3px;" 
+                            placeholder="<%= category.type %>" type="text" id="type" name="type">
+                            <input type="hidden" value="<%= category.id %>" name="id">
+                            <button>Edit</button>
+                        </form>
+                    </p>
                     <a href="./deleteCategory/<%= category.id %>">Delete</a>
                 </div>
             <% }); %>

@@ -22,7 +22,15 @@
         <% items.forEach(item => { %>
             <div class="item" style="border: 1px solid black; padding: 1rem; text-align: center;">
                 <a href=""><h3><%= item.name %></h3></a>
-                <a href="">Edit</a>
+                <p>
+                    <form action="/items/editItem" method="post">
+                        <label for="name">Edit Name: </label>
+                        <input style="display: block; max-width: 100px; margin: 8px 0; padding: 3px;" 
+                        placeholder="<%= item.name %>" type="text" id="name" name="name">
+                        <input type="hidden" value="<%= item.id %>" name="id">
+                        <button>Edit</button>
+                    </form>
+                </p>
                 <a href="./deleteItem/<%= item.id %>">Delete</a>
             </div>
         <% }); %>
