@@ -20,10 +20,14 @@ INSERT INTO items(name, category) VALUES('Charizard', 1);
 async function main(){
     console.log('Seeding...');
     const client = new Client({
-        connectionString: `postgresql://${process.env.ROLE_NAME}:${process.env.ROLE_PASSWORD}@localhost:5432/inventoryapplication`
+        connectionString: process.env.PUBLIC_URL
     });
+    console.log('connecting...')
     await client.connect();
+    console.log('connected')
+    console.log('starting query...')
     await client.query(SQL);
+    console.log('finished query')
     await client.end();
     console.log('Seeding Done.');
 }
